@@ -1,0 +1,12 @@
+{
+    "name": "mechtecs/dsbapi",
+    "require": {
+        "kreait/firebase-php": "^0.10.0"
+    },
+    "authors": [
+        {
+            "name": "Max Schorradt",
+            "email": "schorradt@publicplan.de"
+        }
+    ]
+}
