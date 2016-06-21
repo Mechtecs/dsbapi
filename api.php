@@ -1,5 +1,5 @@
 <?php
-require __DIR__.'/vendor/autoload.php';
+require 'vendor/autoload.php';
 $doc = json_decode(file_get_contents('https://iphone.dsbcontrol.de/iPhoneService.svc/DSB/timetables/'.str_replace("\"", "", file_get_contents('https://iphone.dsbcontrol.de/iPhoneService.svc/DSB/authid/193142/5LuisenG1'))), true);
 $dom = new DomDocument("1.0", "utf-8");
 $dom->loadHTMLFile($doc[1]["timetableurl"]);
