@@ -1,0 +1,18 @@
+klasse
+- id
+- bezeichnug
+- lehrer
+vertretung
+- id
+- klasse
+- stunde
+- art
+* Vertretung
+* Statt-Vertretung
+* Veranst.
+* eigenverantwortliches Arbeiten
+* Raum-Vtr.
+- fach
+- raum
+- text
+- grund
