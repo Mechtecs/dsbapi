@@ -2,7 +2,7 @@
 
  function parse_r($url, $link){
   $dom = new DomDocument("1.0", "utf-8");
-  $dom->loadHTMLFile($doc[1]["timetableurl"]);
+  $dom->loadHTMLFile($url);
   $dom->preserveWhiteSpace = true;
   //get tables
   $tables = $dom->getElementsByTagName('table');
