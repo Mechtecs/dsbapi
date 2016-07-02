@@ -13,7 +13,7 @@ if (!$link) {
 }
 mysqli_set_charset($link, "utf8");
 
-$doc = json_decode(file_get_contents('https://iphone.dsbcontrol.de/iPhoneService.svc/DSB/timetables/'.str_replace("\"", "", file_get_contents('https://iphone.dsbcontrol.de/iPhoneService.svc/DSB/authid/193142/5LuisenG1'))), true);
+$doc = json_decode(file_get_contents('https://iphone.dsbcontrol.de/iPhoneService.svc/DSB/timetables/'.str_replace("\"", "", file_get_contents('https://iphone.dsbcontrol.de/iPhoneService.svc/DSB/authid/193142/5LuisenG1'))) or die('no internet'), true);
 foreach($doc as $d){
   if(strcmp($d["timetabletitle"], "Aktuell keine Inhalte") == 0)
     continue;
