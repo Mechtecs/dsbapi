@@ -11,7 +11,7 @@ if (!$link) {
     echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
     exit;
 }
-mysqli_set_charset($link, "latin1_german2_ci");
+mysqli_set_charset($link, "latin1");
 $doc = json_decode(file_get_contents('https://iphone.dsbcontrol.de/iPhoneService.svc/DSB/timetables/'.str_replace("\"", "", file_get_contents('https://iphone.dsbcontrol.de/iPhoneService.svc/DSB/authid/193142/5LuisenG1'))), true);
 foreach($doc as $d){
   if(strcmp($d["timetabletitle"], "Aktuell keine Inhalte") == 0)
