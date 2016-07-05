@@ -65,7 +65,7 @@
   foreach($rows as $c => $r){
     if($c==0)
       continue;
-    $sql = 'INSERT INTO day_message(datum, row, txt) VALUES (STR_TO_DATE(\''.$date.'\', \'%d.%m.%Y\')), '.($c-1).', "'.$r->nodeValue.'") ON DUPLICATE KEY UPDATE txt = "'.$r->nodeValue.'"';
+    $sql = 'INSERT INTO day_message(datum, row, txt) VALUES (STR_TO_DATE(\''.$date.'\', \'%d.%m.%Y\'), '.($c-1).', "'.$r->nodeValue.'") ON DUPLICATE KEY UPDATE txt = "'.$r->nodeValue.'"';
     echo "\n\n".$sql."\n\n";
     mysqli_query($link, $sql) or die(mysqli_error($link));
     $k = mysqli_affected_rows($link);
