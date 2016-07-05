@@ -1,6 +1,6 @@
 <?php
 $db_con = array();
-$db_con["username"] = "user"
-$db_con["password"] = "pass"
-$db_con["db"] = "db_name"
-$db_con["host"] = "ip"
+$db_con["username"] = "user";
+$db_con["password"] = "pass";
+$db_con["db"] = "db_name";
+$db_con["host"] = "ip";
