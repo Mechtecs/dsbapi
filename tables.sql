@@ -60,11 +60,31 @@ CREATE TABLE `plan_morgen` (
 -- Tabellenstruktur für Tabelle `updates`
 --
 
-CREATE TABLE `updates` (
+CREATE TABLE IF NOT EXISTS `updates` (
   `id` bigint(20) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Indizes der exportierten Tabellen
+--
+
+--
+-- Indizes für die Tabelle `updates`
+--
+ALTER TABLE `updates`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT für exportierte Tabellen
+--
+
+--
+-- AUTO_INCREMENT für Tabelle `updates`
+--
+ALTER TABLE `updates`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  
 -- --------------------------------------------------------
 
 --
