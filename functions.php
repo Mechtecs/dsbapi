@@ -29,13 +29,13 @@
     }else{
       $tmp = array();
       $tr = $r->getElementsByTagName("td");
-      $tmp["klasse"] = $tr[0]->nodeValue;
-      $tmp["stunde"] = $tr[1]->nodeValue;
-      $tmp["art"] = $tr[2]->nodeValue;
-      $tmp["fach"] = $tr[3]->nodeValue;
-      $tmp["raum"] = str_replace("→", "=>", $tr[4]->nodeValue);
-      $tmp["text"] = $tr[5]->nodeValue;
-      $tmp["grund"] = $tr[6]->nodeValue;
+      $tmp["klasse"] = utf8_decode($tr[0]->nodeValue);
+      $tmp["stunde"] = utf8_decode($tr[1]->nodeValue);
+      $tmp["art"] = utf8_decode($tr[2]->nodeValue);
+      $tmp["fach"] = utf8_decode($tr[3]->nodeValue);
+      $tmp["raum"] = utf8_decode(str_replace("→", "=>", $tr[4]->nodeValue));
+      $tmp["text"] = utf8_decode($tr[5]->nodeValue);
+      $tmp["grund"] = utf8_decode($tr[6]->nodeValue);
       $daten[$i]["vertretungen"][] = $tmp;
     }
   }
