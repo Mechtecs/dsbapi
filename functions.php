@@ -1,4 +1,4 @@
- <?php
+<?php
 
  function parse_r($url, $link){
   $dom = new DomDocument("1.0", "utf-8");
@@ -6,6 +6,7 @@
   $dom->preserveWhiteSpace = true;
   //get tables
   $tables = $dom->getElementsByTagName('table');
+  $date = explode(" ", $dom->getElementsByTagName('div')[0]->nodeValue)[0];
   $list = $tables[2];
   $rows = $list->getElementsByTagName("tr");
 
@@ -32,19 +33,26 @@
       $tmp["stunde"] = $tr[1]->nodeValue;
       $tmp["art"] = $tr[2]->nodeValue;
       $tmp["fach"] = $tr[3]->nodeValue;
-      $tmp["raum"] = $tr[4]->nodeValue;
+      $tmp["raum"] = str_replace("→", "=>", $tr[4]->nodeValue);
       $tmp["text"] = $tr[5]->nodeValue;
       $tmp["grund"] = $tr[6]->nodeValue;
       $daten[$i]["vertretungen"][] = $tmp;
     }
   }
-  echo json_encode($daten, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
   foreach($daten as $row){
     $bez = $row["bezeichnung"];
     $lehrer = $row["lehrer"];
     mysqli_query($link, "INSERT INTO klasse (bezeichnung, lehrer) VALUES ('$bez', '$lehrer') ON DUPLICATE KEY UPDATE lehrer='$lehrer'");
     foreach($row["vertretungen"] as $r){
-
+      $klasse = $bez;
+      $stunde = $r["stunde"];
+      $art = $r["art"];
+      $fach = str_replace("Â ", "---", $r["fach"]);
+      $raum = str_replace("Â ", "---", $r["raum"]);
+      $text = str_replace("Â ", "---", $r["text"]);
+      $grund = str_replace("Â ", "---", $r["grund"]);
+      echo $klasse."\n";
+      mysqli_query($link, 'INSERT INTO vertretung (id_klasse, stunde, datum, art, fach, raum, txt, grund, created_at) VALUES ((SELECT id FROM klasse WHERE bezeichnung = "'.$klasse.'" LIMIT 1), "'.$stunde.'", STR_TO_DATE(\''.$date.'\', \'%d.%m.%Y\'), "'.$art.'", "'.$fach.'", "'.$raum.'", "'.$text.'", "'.$grund.'", CURRENT_TIMESTAMP) ON DUPLICATE KEY UPDATE `art` = "'.$art.'", `fach` = "'.$fach.'", `raum` = "'.$raum.'", `txt` = "'.$text.'", `grund` = "'.$grund.'"') or die(mysqli_error($link));
     }
   }
 }

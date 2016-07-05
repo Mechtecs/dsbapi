@@ -12,7 +12,10 @@ vertretung
 * Veranst.
 * eigenverantwortliches Arbeiten
 * Raum-Vtr.
+* Freisetzung
+* Entfall
 - fach
 - raum
 - text
 - grund
+INSERT INTO vertretung (id_klasse, stunde, art, fach, raum, txt, grund) VALUES (7, '4 - 5', 'Vertretung', 'Englisch LK', '806', 'eva', 'LK') ON DUPLICATE KEY UPDATE vertretung SET raum = '806', txt = 'kein eva', grund = 'LK';
