@@ -53,6 +53,11 @@
       $grund = str_replace("Â ", "---", $r["grund"]);
       echo $klasse."\n";
       mysqli_query($link, 'INSERT INTO vertretung (id_klasse, stunde, datum, art, fach, raum, txt, grund, created_at) VALUES ((SELECT id FROM klasse WHERE bezeichnung = "'.$klasse.'" LIMIT 1), "'.$stunde.'", STR_TO_DATE(\''.$date.'\', \'%d.%m.%Y\'), "'.$art.'", "'.$fach.'", "'.$raum.'", "'.$text.'", "'.$grund.'", CURRENT_TIMESTAMP) ON DUPLICATE KEY UPDATE `art` = "'.$art.'", `fach` = "'.$fach.'", `raum` = "'.$raum.'", `txt` = "'.$text.'", `grund` = "'.$grund.'"') or die(mysqli_error($link));
+      $k = mysqli_affected_rows($link);
+      if($k==1){
+        echo "UPDATES!!!! WHOOP!"."\n";
+        mysqli_query($link, "INSERT INTO updates() VALUES ()");
+      }
     }
   }
 }
