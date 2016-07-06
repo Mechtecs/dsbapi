@@ -60,16 +60,18 @@
       }
     }
   }
-  $motd = $tables[1];
-  $rows = $motd->getElementsByTagName("tr");
-  foreach($rows as $c => $r){
-    if($c==0)
-      continue;
-    mysqli_query($link, 'INSERT INTO day_message(datum, row, txt) VALUES (STR_TO_DATE(\''.$date.'\', \'%d.%m.%Y\'), '.($c-1).', "'.$r->nodeValue.'") ON DUPLICATE KEY UPDATE txt = "'.$r->nodeValue.'"') or die(mysqli_error($link));
-    $k = mysqli_affected_rows($link);
-    if($k==1){
-      echo "UPDATES!!!! WHOOP!"."\n";
-      mysqli_query($link, "INSERT INTO updates() VALUES ()");
+  if($tables->length > 2){
+    $motd = $tables[1];
+    $rows = $motd->getElementsByTagName("tr");
+    foreach($rows as $c => $r){
+      if($c==0)
+        continue;
+      mysqli_query($link, 'INSERT INTO day_message(datum, row, txt) VALUES (STR_TO_DATE(\''.$date.'\', \'%d.%m.%Y\'), '.($c-1).', "'.$r->nodeValue.'") ON DUPLICATE KEY UPDATE txt = "'.$r->nodeValue.'"') or die(mysqli_error($link));
+      $k = mysqli_affected_rows($link);
+      if($k==1){
+        echo "UPDATES!!!! WHOOP!"."\n";
+        mysqli_query($link, "INSERT INTO updates() VALUES ()");
+      }
     }
   }
 }
