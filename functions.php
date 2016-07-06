@@ -7,7 +7,7 @@
   //get tables
   $tables = $dom->getElementsByTagName('table');
   $date = explode(" ", $dom->getElementsByTagName('div')[0]->nodeValue)[0];
-  $list = $tables[2];
+  $list = $tables[$tables->length - 1];
   $rows = $list->getElementsByTagName("tr");
 
   $daten = array();
